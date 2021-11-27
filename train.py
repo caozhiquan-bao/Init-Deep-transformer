@@ -17,11 +17,11 @@ import random
 
 import torch
 
-from fairseq import distributed_utils, options, progress_bar, tasks, utils
-from fairseq.data import iterators
-from fairseq.trainer import Trainer
-from fairseq.meters import AverageMeter, StopwatchMeter
-from fairseq.utils import import_user_module
+from MODEL import distributed_utils, options, progress_bar, tasks, utils
+from MODEL.data import iterators
+from MODEL.trainer import Trainer
+from MODEL.meters import AverageMeter, StopwatchMeter
+from MODEL.utils import import_user_module
 
 
 def main(args, init_distributed=False):

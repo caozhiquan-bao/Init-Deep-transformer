@@ -11,9 +11,9 @@ Translate pre-processed data with a trained model.
 
 import torch
 
-from fairseq import bleu, options, progress_bar, tasks, utils
-from fairseq.meters import StopwatchMeter, TimeMeter
-from fairseq.utils import import_user_module
+from MODEL import bleu, options, progress_bar, tasks, utils
+from MODEL.meters import StopwatchMeter, TimeMeter
+from MODEL.utils import import_user_module
 
 
 def main(args):
