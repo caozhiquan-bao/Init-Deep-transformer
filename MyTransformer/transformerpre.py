@@ -72,6 +72,8 @@ class MultiHeadAttention(nn.Module):
     def forward(self, input_Q, input_K, input_V, attn_mask):
         residual, batch_size = input_Q, input_Q.size(0)
         input_Q = nn.LayerNorm(self.d_model).cuda()(input_Q)
+        input_K = nn.LayerNorm(self.d_model).cuda()(input_K)
+        input_V = nn.LayerNorm(self.d_model).cuda()(input_V)
         Q = self.W_Q(input_Q).view(batch_size, -1, self.n_heads, self.d_k).transpose(1, 2)
         K = self.W_K(input_K).view(batch_size, -1, self.n_heads, self.d_k).transpose(1, 2)
         V = self.W_V(input_V).view(batch_size, -1, self.n_heads, self.d_v).transpose(1, 2)
