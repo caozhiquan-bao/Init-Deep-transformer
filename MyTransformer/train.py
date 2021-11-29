@@ -60,6 +60,21 @@ for epoch in range(train_epoch):
         optimizer.step()
         count_batch += 1
     # 每轮执行一次校验
+    model.eval()
+        with torch.no_grad():
+            total_loss = 0
+            count_loss = 0
+            for valid_batch, valid_target, out in zip(valid_enc_inputs, valid_dec_inputs, valid_dec_outputs):
+                valid_output, _, _, _ = model(valid_batch, valid_target)
+                valid_loss = criterion(valid_output, out)
+                total_loss += valid_loss.item()
+                count_loss += 1
+
+            print(f'\nValidating at epoch', '%04d:' % (epoch + 1), 'loss:',
+                  '{:.6f},'.format(total_loss / count_loss),
+                  'ppl:', '{:.6}'.format(math.exp(total_loss / count_loss)))
+        print('-' * 80)
+        model.train()
     torch.save(model, '.\checkpoints\iwslt-de2en\Transformer.pkl')
 
 
